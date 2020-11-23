@@ -6,12 +6,18 @@ const app = express();
 app.get ("/all",(req,res)=>{
     res.send(projectData)
 })
-
+const data = [];
 app.post('/data',addData);
 
 function addData (req,res){
-    projectData.push(req.body);
-};
+    console.log(req.body);
+    newData={
+        temperature:req.body.temperature,
+        date:req.body.date,
+        userResponse:req.body.userResponse
+    }
+    projectData.push(newData);
+}
 
 const bodyParser= reqire('body-parser');
 
