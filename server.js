@@ -1,6 +1,6 @@
 projectData={};
 
-const express= reqire('express');
+const express= require('express');
 const app = express();
 
 app.get ("/all",(req,res)=>{
@@ -10,7 +10,8 @@ const data = [];
 app.post('/data',addData);
 
 function addData (req,res){
-    console.log(req.body);
+    let data = req.body;
+    console.log('server side data ',data);
     newData={
         temperature:req.body.temperature,
         date:req.body.date,
@@ -19,21 +20,21 @@ function addData (req,res){
     projectData.push(newData);
 }
 
-const bodyParser= reqire('body-parser');
+const bodyParser= require('body-parser')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const cors = reqire('cors');
+const cors = require('cors');
 app.use(cors());
 
 app.use(express.static('website'));
 
 //setup server
-const port = 3000;
+const port = 8000;
 const server = app.listen(port,listening);
 function listening(){
     console.log("server runing");
-    console.log(`running on localhost: {$port}`);
+    console.log(`running on localhost: ${port}`);
 }
 

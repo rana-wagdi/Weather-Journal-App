@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/rana2020701/Weather-Journal-App/issues"
   },
-  "homepage": "https://github.com/rana2020701/Weather-Journal-App#readme"
+  "homepage": "https://github.com/rana2020701/Weather-Journal-App#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
 }
