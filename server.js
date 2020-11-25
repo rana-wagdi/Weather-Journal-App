@@ -3,21 +3,32 @@ projectData={};
 const express= require('express');
 const app = express();
 
+
+const newData={
+
+}
+
+const weatherData=[];
+
+
+
 app.get ("/all",(req,res)=>{
-    res.send(projectData)
+    res.send(weatherData)
 })
 const data = [];
-app.post('/data',addData);
+app.post('/addData',addData);
 
 function addData (req,res){
-    let data = req.body;
-    console.log('server side data ',data);
+    
+    console.log(req,body)
     newData={
         temperature:req.body.temperature,
         date:req.body.date,
         userResponse:req.body.userResponse
     }
     projectData.push(newData);
+    res.send(weatherData)
+    console.log(weatherData);
 }
 
 const bodyParser= require('body-parser')
