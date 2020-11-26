@@ -1,34 +1,37 @@
-projectData={};
+projectData=[];
 
 const express= require('express');
 const app = express();
 
 
-const newData={
 
+
+
+
+app.post('/add',callback);
+function callback(req,res){
+res.send(projectData)
+projectData=[]
 }
+app.get('/all',sendData);
 
-const weatherData=[];
+function sendData (request,response){
+    response.send(projectData);
+};
 
-
-
-app.get ("/all",(req,res)=>{
-    res.send(weatherData)
-})
-const data = [];
 app.post('/addData',addData);
 
 function addData (req,res){
     
-    console.log(req,body)
+    console.log(req.body);
     newData={
-        temperature:req.body.temperature,
         date:req.body.date,
-        userResponse:req.body.userResponse
+        temperature:req.body.temperature,
+        content:req.body.content
     }
     projectData.push(newData);
-    res.send(weatherData)
-    console.log(weatherData);
+    res.send(projectData)
+    console.log(projectData);
 }
 
 const bodyParser= require('body-parser')
@@ -37,6 +40,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const cors = require('cors');
+
 app.use(cors());
 
 app.use(express.static('website'));
