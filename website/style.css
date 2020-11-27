@@ -21,7 +21,7 @@ h1{
 }
 #app{
     width: 500px;
-    padding: 40px;
+    padding: 25px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -35,7 +35,7 @@ h1{
 input{
     padding: 15px 0;
     width: 300px;
-    margin: 10px 0;
+    margin-top: 10px ;
     color: black;
     border: 2px rgba(0, 0, 0, 0.527) solid;
 
@@ -43,6 +43,16 @@ input{
 input::placeholder{
     font-size: 16px;
     padding: 0 10px;
+}
+textarea{
+    margin: 6px 0;
+    border: 2px rgba(0, 0, 0, 0.527) solid;
+    color: black;
+    font-size: 20px;
+}
+textarea::placeholder{
+    font-size: 16px;
+    padding: 0 10px
 }
 label{
     font-size: 24px;
@@ -52,4 +62,10 @@ label{
 .holder{
     padding: 10px 0;
     margin: 10px 0;
+}
+button{
+    background-color: chartreuse;
+    padding: 10px 20px;
+    font-size: 20px;
+    margin-bottom: 5px;
 }
