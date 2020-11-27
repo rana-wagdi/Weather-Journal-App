@@ -1,19 +1,24 @@
-projectData={};
+projectData=[]; //should be in array not {}
 
+
+// Express to run server and routes
 const express= require('express');
+
+// Start up an instance of app
 const app = express();
 
+/* Dependencies */
+const bodyParser= require('body-parser')//should be in the top
+/* Middleware*/
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+// Cors for cross origin allowance
+const cors = require('cors');
+app.use(cors());
 
 
+app.use(express.static('website')); // the projects main folder
 
-const fakeData ={
-    date:1-1,
-
-}
-app.get('/fakeWeatherData',getFakeData)
-function getFakeData(req,res){
-    res.send(fakeData)
-}
 
 
 //get route
@@ -37,11 +42,11 @@ app.post('/addData',addData);
 
 function addData (req,res){
     let data=req.body;
-   
+   console.log(req.body);
     newEntry = {
         date:req.body.date,
         temperature:req.body.temperature,
-        userResponse:req.body.content
+        userResponse:req.body.userResponse
     }
     projectData.push(newEntry)
     res.send(projectData)
@@ -49,16 +54,7 @@ function addData (req,res){
 
 }
 
-const bodyParser= require('body-parser')
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-const cors = require('cors');
-
-app.use(cors());
-
-app.use(express.static('website'));
 
 //setup server
 const port = 8000;

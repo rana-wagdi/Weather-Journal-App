@@ -15,22 +15,27 @@ function performAction(e){
     const feelings= document.getElementById('feelings').value;
     getWeather(baseURL,enterZip,APIkey)
     .then(function(data){
-        console.log(data);
-        postData('/addData',{date:newDate,temperature:data.list[0].main.temp,userResponse:feelings})
+        
+        postData('/addData',{date:newDate,temperature:data.list[0].main.temp,userResponse:feelings});
+       
+       
         updateUI()
     });
     };
 
+    /* Function to POST data */
+
     async function postData(url = '', data = {}) {
-        console.log(data);
+        console.log(JSON.stringify(data));
         const response= await fetch(url, {
-        method: 'POST', 
-        credentials: 'same-origin', 
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)         
-      });
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+            
+        }  );    
     
         try {
           const newData = await response.json();
@@ -45,15 +50,13 @@ function performAction(e){
    
     
 const getWeather= async(baseURL,zip,key)=>{
-    const res= await fetch(baseURL+zip+key)
+    const response= await fetch(baseURL+zip+key)
 
 
-
-  //  const res =await fetch ('/newWeatherData')
     try{
-        const data= await res.json();
+        const data= await response.json();
         console.log(data)
-return data 
+    return data 
 
     }
     catch(error) {
@@ -67,9 +70,9 @@ const updateUI =async () => {
     try{
         const allData = await request.json();
         console.log(allData);
-        document.getElementById('date').innerHTML =  allData.date;
-        document.getElementById('temp').innerHTML =`temprture: ${allData.temperature}`;
-        document.getElementById('content').innerHTML = `I feel: ${allData.content}`;
+        document.getElementById('date').innerHTML =  allData[0].date;//we should select the numper of data we need to do
+        document.getElementById('temp').innerHTML = allData[0].temperature;
+        document.getElementById('content').innerHTML = allData[0].userResponse;
     }catch(error){
         console.log("error",error);
     }
