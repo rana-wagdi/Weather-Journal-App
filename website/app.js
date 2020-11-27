@@ -11,15 +11,15 @@ const enterZip = document.getElementById('zip').value;
 document.getElementById('generate').addEventListener('click',performAction);
 
 function performAction(e){
+    e.preventDefault();
     const feelings= document.getElementById('feelings').value;
     getWeather(baseURL,enterZip,APIkey)
     .then(function(data){
         console.log(data);
-        postData('/add',{date:newDate,temperature:data.list[0].main.temp,userResponse:feelings})
-        
+        postData('/addData',{date:newDate,temperature:data.list[0].main.temp,userResponse:feelings})
         updateUI()
-    })
-    }
+    });
+    };
 
     async function postData(url = '', data = {}) {
         console.log(data);
@@ -41,6 +41,7 @@ function performAction(e){
         }
        
     }
+
    
     
 const getWeather= async(baseURL,zip,key)=>{
@@ -62,11 +63,13 @@ return data
 
 const updateUI =async () => {
     const request = await fetch('/all');
+    console.log(request);
     try{
-        const allData = await request.json()
-        document.getElementById('date').innerHTML = `Date: ${allData[0].date}`;
-        document.getElementById('temp').innerHTML =`temprture: ${allData[0].temperature}`;
-        document.getElementById('content').innerHTML = `I feel: ${allData[0].content}`;
+        const allData = await request.json();
+        console.log(allData);
+        document.getElementById('date').innerHTML =  allData.date;
+        document.getElementById('temp').innerHTML =`temprture: ${allData.temperature}`;
+        document.getElementById('content').innerHTML = `I feel: ${allData.content}`;
     }catch(error){
         console.log("error",error);
     }

@@ -1,4 +1,4 @@
-projectData=[];
+projectData={};
 
 const express= require('express');
 const app = express();
@@ -6,32 +6,47 @@ const app = express();
 
 
 
+const fakeData ={
+    date:1-1,
 
+}
+app.get('/fakeWeatherData',getFakeData)
+function getFakeData(req,res){
+    res.send(fakeData)
+}
+
+
+//get route
+
+
+app.get('/all',sendData);
+
+function sendData (request,res){
+    res.send(projectData);
+    projectData=[];
+}
 
 app.post('/add',callback);
 function callback(req,res){
-res.send(projectData)
-projectData=[]
-}
-app.get('/all',sendData);
+res.send(projectData);
 
-function sendData (request,response){
-    response.send(projectData);
-};
+}
+//post route
 
 app.post('/addData',addData);
 
 function addData (req,res){
-    
-    console.log(req.body);
-    newData={
+    let data=req.body;
+   
+    newEntry = {
         date:req.body.date,
         temperature:req.body.temperature,
-        content:req.body.content
+        userResponse:req.body.content
     }
-    projectData.push(newData);
+    projectData.push(newEntry)
     res.send(projectData)
-    console.log(projectData);
+   
+
 }
 
 const bodyParser= require('body-parser')
