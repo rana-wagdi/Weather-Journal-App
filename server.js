@@ -1,4 +1,4 @@
-projectData=[]; //should be in array not {}
+projectData=[]; 
 
 
 // Express to run server and routes
@@ -31,13 +31,9 @@ function sendData (request,res){
     projectData=[];
 }
 
-app.post('/add',callback);
-function callback(req,res){
-res.send(projectData);
 
-}
 //post route
-
+const data=[]
 app.post('/addData',addData);
 
 function addData (req,res){
